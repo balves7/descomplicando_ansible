@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bangu-v1
+spec:
+  replicas: {{ number_replicas_old_version }}
+  selector:
+    matchLabels:
+      app: bangu
+  template:
+    metadata:
+      labels:
+        app: bangu
+        version: {{ old_version }}
+      annotations:
+        prometheus.io/scrape: "{{ prometheus_scrape }}"
+        prometheus.io/scrape: "{{ prometheus_port }}"
+    spec:
+      containers:
+      - name: bangu
+        image: linuxtips/nginx-prometheus-exporter:{{ old_version }} 
+        env:
+        - name: VERSION
+          value: {{ old_version }} 
+        ports:
+        - containerPort: {{ nginx_port }}
+        - containerPort: {{ prometheus_port }}

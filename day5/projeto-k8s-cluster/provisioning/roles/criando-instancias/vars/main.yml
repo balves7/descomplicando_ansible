@@ -1,0 +1,10 @@
+---
+# vars file for criando-instancias
+instance_type: t2.medium
+sec_group_name: bangu
+image: ami-02e63356007ced764
+keypair: bangu-key
+region: us-east-1
+count: 3
+profile: brunoalves7
+
